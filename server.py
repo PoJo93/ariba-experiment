@@ -3,12 +3,12 @@
 import os, json
 
 from flask import Flask, request
-from bot import cai, dynalist
+from bot import cai, ariba
 
 
 port = int(os.getenv("PORT"))
 app = Flask(__name__)
-dynalist_client = dynalist.DynalistClient()
+dynalist_client = ariba.AribaClient()
 
 @app.route("/approvals/show", methods=['POST'])
 def post_to_inbox():

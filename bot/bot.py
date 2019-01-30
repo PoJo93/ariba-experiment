@@ -6,7 +6,7 @@ from flask import jsonify
 
 # both functions are doing the same on a different route
 # create an DynalistClient class that encapsulates the Dynalist API
-from bot.dynalist import call_dynalist_api, build_dynalist_note, build_dynalist_payload
+from bot.ariba import call_dynalist_api, build_dynalist_note, build_dynalist_payload
 from bot.cai import extract_content
 
 
