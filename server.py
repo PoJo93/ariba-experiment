@@ -10,15 +10,11 @@ port = int(os.getenv("PORT"))
 app = Flask(__name__)
 dynalist_client = dynalist.DynalistClient()
 
-@app.route("/post_to_inbox", methods=['POST'])
+@app.route("/approvals/show", methods=['POST'])
 def post_to_inbox():
     return process_request(request, dynalist_client.call_inbox_add_api)
 
 
-# GET would be semantically the better option but doesn't work here as we have to submit a JSON payload
-@app.route("/auth/validate", methods=['POST'])
-def validate_token():
-    return process_request(request, dynalist_client.call_check_token_api)
 
 @app.route("/dialogflow/test", methods=['POST'])
 def debug_dialogflow():
