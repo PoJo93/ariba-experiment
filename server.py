@@ -8,11 +8,11 @@ from bot import cai, ariba
 
 port = int(os.getenv("PORT"))
 app = Flask(__name__)
-dynalist_client = ariba.AribaClient()
+ariba_client = ariba.AribaClient()
 
-@app.route("/approvals/show", methods=['POST'])
-def post_to_inbox():
-    return process_request(request, dynalist_client.call_inbox_add_api)
+@app.route("/approvables/show", methods=['POST'])
+def show_approvables():
+    return process_request(request, ariba_client.call_pending_approvables_api())
 
 
 

@@ -2,11 +2,11 @@
 from flask import jsonify
 
 
-def build_response(cai_conversation, dynalist_response):
-    dynalist_response_json = dynalist_response.json()
+def build_response(cai_conversation, ariba_response):
+    ariba_response_json = ariba_response.json()
     memory_response = cai_conversation.conversation_memory
-    memory_response['status_code'] = dynalist_response_json.get('_code', 'NoResponse')
-    memory_response['status_message'] = dynalist_response_json.get('_msg', '')
+    memory_response['approvables_totalElements'] = ariba_response_json.get('totalElements', '0')
+    memory_response['approvables_content'] = ariba_response_json.get('content', '')
     response = jsonify(
         status=200,
         conversation={
