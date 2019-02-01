@@ -12,7 +12,7 @@ ariba_client = ariba.AribaClient()
 
 @app.route("/approvables/show", methods=['POST'])
 def show_approvables():
-    return process_request(request, ariba_client.call_pending_approvables_api())
+    return process_request(request, ariba_client.call_pending_approvables_api)
 
 
 
@@ -26,7 +26,9 @@ def process_request(request_cai, clientApiMethod):
     cai_conversation = cai.CAIConversation.from_json_payload(cai_json)
 
     response = clientApiMethod(cai_conversation)
-    return cai.build_response(cai_conversation, response)
+    messages = ariba_client.process_ariba_response_approvables(response)
+
+    return cai.build_response(cai_conversation, response, messages)
 
 
 if __name__ == '__main__':

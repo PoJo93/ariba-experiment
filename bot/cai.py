@@ -2,7 +2,7 @@
 from flask import jsonify
 
 
-def build_response(cai_conversation, ariba_response):
+def build_response(cai_conversation, ariba_response, messages):
     ariba_response_json = ariba_response.json()
     memory_response = cai_conversation.conversation_memory
     memory_response['approvables_totalElements'] = ariba_response_json.get('totalElements', '0')
@@ -11,9 +11,12 @@ def build_response(cai_conversation, ariba_response):
         status=200,
         conversation={
             'memory': memory_response
-        }
+        },
+        replies=messages
     )
     return response
+
+
 
 
 class CAIConversation:
