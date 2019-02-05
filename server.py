@@ -17,7 +17,7 @@ def show_approvables():
 
     response = ariba_client.call_pending_approvables_api(cai_conversation)
 
-    messages = ariba_client.process_ariba_response_approvables(response)
+    messages = ariba_client.show_approvables_from_response(response)
     return cai.build_response(cai_conversation, response, messages)
 
 
@@ -29,6 +29,16 @@ def check_approvables():
     response = ariba_client.call_pending_approvables_api(cai_conversation)
 
     messages = ''
+    return cai.build_response(cai_conversation, response, messages)
+
+@app.route("/approvables/filter", methods=['POST'])
+def filter_approvables():
+    cai_json = json.loads(request.get_data().decode('utf-8'))
+    cai_conversation = cai.CAIConversation.from_json_payload(cai_json)
+
+    response = ariba_client.call_pending_approvables_api(cai_conversation)
+
+    messages = ariba_client.show_approvables_from_response(response)
     return cai.build_response(cai_conversation, response, messages)
 
 
